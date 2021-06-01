@@ -74,7 +74,7 @@ class LevDistance(object):
                        )
 
 if __name__ == '__main__':
-    input_list = [100, 300, 500, 700, 900]
+    input_list = [5, 10, 15, 20]
 
     time_rec_dp, time_rec_bf = [], []
     for i in input_list:
@@ -92,14 +92,14 @@ if __name__ == '__main__':
         print(i, '\t', elapsed_time)
         time_rec_bf.append(elapsed_time)
 
-    n = [time_rec_dp[0] * (i / 100) ** 2 for i in input_list]
-    np = [3 ** (time_rec_bf[0] * (i / 100)) for i in input_list]
+#    n = [time_rec_dp[0] * (i / 2) ** 2 for i in input_list]
+    np = [time_rec_bf[0] * 3 ** (i / 2) for i in input_list]
 
     plt.figure(figsize=(12, 6))
-    plt.plot(range(len(input_list)), time_rec_dp, 'r', label='Elapsed Time for DP')
+#    plt.plot(range(len(input_list)), time_rec_dp, 'r', label='Elapsed Time for DP')
     plt.plot(range(len(input_list)), time_rec_bf, 'b', label='Elapsed Time for BF')
 
-    plt.plot(range(len(input_list)), n, 'green', label='O(n^2)')
+#    plt.plot(range(len(input_list)), n, 'green', label='O(n^2)')
     plt.plot(range(len(input_list)), np, 'orange', label='O(3^n)')
 
     plt.title('Comparison on Elapsed Time following input size')
