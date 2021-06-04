@@ -65,16 +65,16 @@ class LevDistance(object):
         elif len(str2) == 0:
             return len(str1)
 
-        if str1[-1] == str2[-1]:
-            return self.bf_(str1[:-1], str2[:-1])
+        if str1[0] == str2[0]:
+            return self.bf_(str1[1:], str2[1:])
 
-        return 1 + min(self.bf_(str1, str2[:-1]),
-                       self.bf_(str1[:-1], str2),
-                       self.bf_(str1[:-1], str2[:-1])
+        return 1 + min(self.bf_(str1, str2[1:]),
+                       self.bf_(str1[1:], str2),
+                       self.bf_(str1[1:], str2[1:])
                        )
 
 if __name__ == '__main__':
-    input_list = [5, 10, 15, 20]
+    input_list = [1, 3, 5, 7, 9]
 
     time_rec_dp, time_rec_bf = [], []
     for i in input_list:
@@ -92,14 +92,14 @@ if __name__ == '__main__':
         print(i, '\t', elapsed_time)
         time_rec_bf.append(elapsed_time)
 
-#    n = [time_rec_dp[0] * (i / 2) ** 2 for i in input_list]
-    np = [time_rec_bf[0] * 3 ** (i / 2) for i in input_list]
+    n = [time_rec_dp[0] * i ** 2 for i in input_list]
+    np = [time_rec_bf[0] * (3 ** i) for i in input_list]
 
     plt.figure(figsize=(12, 6))
-#    plt.plot(range(len(input_list)), time_rec_dp, 'r', label='Elapsed Time for DP')
+    plt.plot(range(len(input_list)), time_rec_dp, 'r', label='Elapsed Time for DP')
     plt.plot(range(len(input_list)), time_rec_bf, 'b', label='Elapsed Time for BF')
 
-#    plt.plot(range(len(input_list)), n, 'green', label='O(n^2)')
+    plt.plot(range(len(input_list)), n, 'green', label='O(n^2)')
     plt.plot(range(len(input_list)), np, 'orange', label='O(3^n)')
 
     plt.title('Comparison on Elapsed Time following input size')
@@ -107,5 +107,5 @@ if __name__ == '__main__':
     plt.ylabel('Elapsed Time')
     plt.xticks(ticks=range(len(input_list)), labels=input_list)
     plt.legend()
-    # plt.show()
-    plt.savefig('./edit_dist_plot.png', dpi=300)
+    plt.show()
+    # plt.savefig('./edit_dist_plot.png', dpi=300)
